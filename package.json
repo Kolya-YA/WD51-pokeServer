@@ -1,0 +1,23 @@
+{
+  "name": "poke-server",
+  "version": "1.0.0",
+  "description": "Poke server",
+  "main": "src/app.js",
+  "type": "module",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "scripts": {
+    "dev": "node --env-file=.env --watch src/app.js",
+    "start": "node --env-file=.env src/app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mongoose": "^8.4.4"
+  }
+}
