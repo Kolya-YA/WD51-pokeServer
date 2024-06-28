@@ -5,9 +5,44 @@ const fighterSchema = new Schema(
 	{
 		name: {
 			type: String,
-			required: true,
-			unique: true,
+			required: [true, "Name is required"],
+			trim: true,
 			minlength: 3,
+            maxlength: 32,
+            validate: {
+                validator: async function(name) {
+                    const user = await this.constructor.findOne({ name });
+                    if (user && user.id !== this.id) {
+                        return false;
+                    }
+                    return true;
+                },
+                message: (props) => `The name ${props.value} is already taken`,
+            },
+		},
+		email: {
+			type: String,
+			required: true,
+			trim: true,
+			lowercase: true,
+			validate: [
+				{
+					validator: (email) => {
+						return /^[\w-]+@([\w-]+\.)+[\w-]{2,4}$/.test(email);
+					},
+					message: (props) => `${props.value} is not a valid email address`,
+				},
+				{
+					validator: async function (email) {
+						const user = await this.constructor.findOne({ email });
+						if (user && user.id !== this.id) {
+							return false;
+						}
+						return true;
+					},
+					message: (props) => `The email ${props.value} is already taken`,
+				},
+			],
 		},
 		password: {
 			type: String,
