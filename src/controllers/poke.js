@@ -9,7 +9,7 @@ export const getAllPokemons = (req, res) => {
 export const getOnePokemonById = (req, res, next) => {
 	const id = +req.params.id;
     if (typeof id !== "number" || Number.isNaN(id)) {
-        return next(new Error("Invalid ID"));
+        return next(new Error("Invalid pokemon ID"));
     }
 	const pokemon = pokeBase.find((p) => p.id === id);
 	if (!pokemon) {

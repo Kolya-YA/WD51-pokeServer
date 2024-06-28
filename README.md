@@ -43,6 +43,11 @@ npm start
 - `GET /api/v1/pokes/types`: Get list of pokemon types.
 - `GET /api/v1/pokes/types/:type`: Get pokemons of specific types.
 
+### Fighter Routes
+
+- `POST /api/v1/fighters`: Create new fighter.
+- `GET /api/v1/fighters`: Get all fighters.
+
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more information.

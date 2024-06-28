@@ -1,19 +1,19 @@
 import express from 'express';
-import { getAllPokemons, getOnePokemonById, getPokemonsByType, getTypesOfPokemons } from '../controllers/pokeController.js';
+import { getAllPokemons, getOnePokemonById, getPokemonsByType, getTypesOfPokemons } from '../controllers/poke.js';
 
-const router = express.Router();
+const pokeRouter = express.Router();
 
 // Get all pokemon
-router.get('/', getAllPokemons);
+pokeRouter.get('/', getAllPokemons);
 
 // Get all pokemon types
-router.get('/types', getTypesOfPokemons);
+pokeRouter.get('/types', getTypesOfPokemons);
 
 // Get all pokemon of some type
-router.get('/types/:type', getPokemonsByType);
+pokeRouter.get('/types/:type', getPokemonsByType);
 
 // Get a single pokemon by ID
-router.get('/:id', getOnePokemonById);
+pokeRouter.get('/:id', getOnePokemonById);
 
 
-export default router;
+export default pokeRouter;

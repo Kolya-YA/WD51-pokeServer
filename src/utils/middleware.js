@@ -22,8 +22,16 @@ export const errorHandler = (error, req, res, next) => {
 	if (error.name === "ValidationError") {
 		return res.status(400).json({ error: error.message });
 	}
+     if (
+		error.name === "MongoServerError" &&
+		error.message.includes("E11000 duplicate key error")
+	) {
+		return response
+			.status(400)
+			.json({ error: "Уxpected `username` to be unique" });
+	}
 
-	if (error.message === "Invalid ID") {
+	if (error.message === "Invalid pokemon ID") {
 		return res.status(400).json({ error: error.message });
 	}
 	next(error);
