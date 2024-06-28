@@ -1,24 +1,21 @@
-import express from 'express';
-import cors from 'cors';
-import pokeRoutes from './routes/pokeRoutes.js';
+import express from "express";
+import cors from "cors";
+import config from "./utils/config.js";
+// import logger from './utils/logger.js';
+import pokeRoutes from "./routes/pokeRoutes.js";
+import connectDB from "./utils/mongo.js";
+import { errorHandler, requestLogger, unknownEndpoint } from "./utils/middleware.js";
 
+const app = express();
+connectDB();
 
-const app = express()
-
-const corsOptions = {
-    origin: process.env.ORIGINS.split(', ')
-}
-app.use(cors(corsOptions))
-
-const PORT = process.env.PORT || 3001;
-
-// Middleware
+app.use(cors(config.corsOptions));
 app.use(express.json());
+app.use(requestLogger);
 
-// Routes
-app.use('/api/v1/pokes', pokeRoutes);
+app.use("/api/v1/pokes", pokeRoutes);
 
-// Start the server
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+app.use(errorHandler)
+app.use(unknownEndpoint);
+
+export default app;
