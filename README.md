@@ -45,8 +45,13 @@ npm start
 
 ### Fighter Routes
 
+- `GET /api/v1/fighters/top`: Get all fighters.
 - `POST /api/v1/fighters`: Create new fighter.
-- `GET /api/v1/fighters`: Get all fighters.
+- `POST /api/v1/fighters/login`: Login fighter.
+- `GET /api/v1/fighters`: Get all fighters. *only for logged users*
+- `GET /api/v1/fighters/:id`: Get one fighter by ID. *only for logged users*
+- `PUT /api/v1/fighters/:id`: Update one fighter by ID. *only for logged users*
+- `DELETE /api/v1/fighters/:id`: Delete one fighter by ID. *only for logged users*
 
 ## License
 
