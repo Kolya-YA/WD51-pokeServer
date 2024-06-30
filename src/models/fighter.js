@@ -1,24 +1,26 @@
 import { Schema, model } from "mongoose";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+import config from "../utils/config.js";
 
-const fighterSchema = new Schema(
+const FighterSchema = new Schema(
 	{
 		name: {
 			type: String,
 			required: [true, "Name is required"],
 			trim: true,
 			minlength: 3,
-            maxlength: 32,
-            validate: {
-                validator: async function(name) {
-                    const user = await this.constructor.findOne({ name });
-                    if (user && user.id !== this.id) {
-                        return false;
-                    }
-                    return true;
-                },
-                message: (props) => `The name ${props.value} is already taken`,
-            },
+			maxlength: 32,
+			validate: {
+				validator: async function (name) {
+					const user = await this.constructor.findOne({ name });
+					if (user && user.id !== this.id) {
+						return false;
+					}
+					return true;
+				},
+				message: (props) => `The name ${props.value} is already taken`,
+			},
 		},
 		email: {
 			type: String,
@@ -85,16 +87,29 @@ const fighterSchema = new Schema(
 	{ collection: "fighters" },
 );
 
-fighterSchema.pre("save", async function (next) {
+FighterSchema.pre("save", async function (next) {
 	if (this.isModified("password")) {
 		this.password = await bcrypt.hash(this.password, 10);
-		this.passwordConfirmation = undefined; // Field passwordConfirmation is not saved in DB
+		this.passwordConfirmation = undefined;
 	}
-	console.log("pre save hook", this);
 	next();
 });
 
-fighterSchema.set("toJSON", {
+FighterSchema.methods.checkPassword = async function (password) {
+	return await bcrypt.compare(password, this.password);
+};
+
+FighterSchema.methods.genrateAuthToken = function () {
+	return jwt.sign(
+		{ id: this._id.toString(), name: this.name, isAdmin: this.isAdmin },
+		config.JWT_SECRET,
+		{
+			expiresIn: "1h",
+		},
+	);
+};
+
+FighterSchema.set("toJSON", {
 	transform: (document, returnedObject) => {
 		returnedObject.id = returnedObject._id.toString();
 		returnedObject._id = undefined;
@@ -102,6 +117,6 @@ fighterSchema.set("toJSON", {
 	},
 });
 
-const Fighter = model("Fighter", fighterSchema);
+const Fighter = model("Fighter", FighterSchema);
 
 export default Fighter;
