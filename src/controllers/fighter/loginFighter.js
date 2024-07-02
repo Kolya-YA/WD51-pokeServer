@@ -14,12 +14,7 @@ const loginFighter = async (req, res) => {
 		const token = fighter.createAuthToken();
 		return res.status(200).json({
 			message: "Login successful",
-			fighter: {
-				token,
-				isAdmin: fighter.isAdmin,
-				name: fighter.name,
-				id: fighter._id.toString(),
-			},
+			token
 		});
 	} catch (error) {
 		res.status(500).json({ error: "Authentification error" });
