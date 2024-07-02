@@ -99,7 +99,7 @@ FighterSchema.methods.checkPassword = async function (password) {
 	return await bcrypt.compare(password, this.password);
 };
 
-FighterSchema.methods.genrateAuthToken = function () {
+FighterSchema.methods.createAuthToken = function () {
 	return jwt.sign(
 		{ id: this._id.toString(), name: this.name, isAdmin: this.isAdmin },
 		config.JWT_SECRET,

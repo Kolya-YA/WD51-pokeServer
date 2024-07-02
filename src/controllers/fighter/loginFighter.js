@@ -11,12 +11,15 @@ const loginFighter = async (req, res) => {
 		if (!passwordCorrect) {
 			return res.status(401).json({ error: "Invalid email or password" });
 		}
-		const token = fighter.genrateAuthToken();
-		return res.json({
-			token,
-			isAdmin: fighter.isAdmin,
-			name: fighter.name,
-			id: fighter._id,
+		const token = fighter.createAuthToken();
+		return res.status(200).json({
+			message: "Login successful",
+			fighter: {
+				token,
+				isAdmin: fighter.isAdmin,
+				name: fighter.name,
+				id: fighter._id.toString(),
+			},
 		});
 	} catch (error) {
 		res.status(500).json({ error: "Authentification error" });
