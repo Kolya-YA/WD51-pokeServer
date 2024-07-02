@@ -6,7 +6,7 @@ const createNewFighter = async (req, res, next) => {
 		const savedFighter = await newFighter.save();
 		const token = newFighter.createAuthToken();
 		
-		res.status(201).json({
+		return res.status(201).json({
 			message: "Fighter created",
 			fighter: {
 				token,
