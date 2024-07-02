@@ -78,6 +78,10 @@ const FighterSchema = new Schema(
 				type: Number,
 				default: 0,
 			},
+			score: {
+				type: Number,
+				default: 0,
+			},
 		},
 		isAdmin: {
 			type: Boolean,
