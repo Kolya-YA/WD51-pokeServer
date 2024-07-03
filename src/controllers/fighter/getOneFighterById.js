@@ -12,6 +12,7 @@ const getOneFighterById = async (req, res, next) => {
 		if (req.fighter.id !== fighter.id.toString() && !req.fighter.isAdmin) {
 			throw new Error("No premition to take full info of this fighter");
 		}
+		fighter.password = undefined;
 
 		res.status(200).json(fighter);
 	} catch (error) {
