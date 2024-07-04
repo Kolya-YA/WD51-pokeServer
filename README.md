@@ -53,6 +53,12 @@ npm start
 - `PUT /api/v1/fighters/:id`: Update one fighter by ID. *only for logged users*
 - `DELETE /api/v1/fighters/:id`: Delete one fighter by ID. *only for logged users*
 
+### Battles Routes
+
+- `GET /api/v1/battles/`: Get last 10 battles.
+- `GET /api/v1/battles/:userId`: Get battles for specific user *only for logged users*
+- `POST /api/v1/battles/`: Create new battle and update user *only for logged users*
+
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more information.

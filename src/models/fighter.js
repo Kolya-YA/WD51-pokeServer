@@ -115,7 +115,7 @@ FighterSchema.methods.createAuthToken = function () {
 
 FighterSchema.set("toJSON", {
 	transform: (document, returnedObject) => {
-		returnedObject.id = returnedObject._id.toString();
+		returnedObject.id = returnedObject._id?.toString();
 		returnedObject._id = undefined;
 		returnedObject.__v = undefined;
 	},
