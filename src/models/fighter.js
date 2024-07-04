@@ -88,6 +88,7 @@ const FighterSchema = new Schema(
 			default: false,
 		},
 	},
+	{ timestamps: true },
 	{ collection: "fighters" },
 );
 
@@ -108,7 +109,7 @@ FighterSchema.methods.createAuthToken = function () {
 		{ id: this._id.toString(), name: this.name, isAdmin: this.isAdmin },
 		config.JWT_SECRET,
 		{
-			expiresIn: "1h",
+			expiresIn: "3h",
 		},
 	);
 };
