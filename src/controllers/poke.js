@@ -1,4 +1,13 @@
-import pokeBase from "../data/pokeBase.js";
+import rawPokeBase from "../data/pokeBase.js";
+
+const pokeBase = rawPokeBase.map((pokemon) => ({
+	...pokemon,
+	images: {
+		svg: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${pokemon.id}.svg`,
+		gif: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown${pokemon.id}.gif`,
+		png: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png`,
+	},
+}));
 
 const pokeTypes = [...new Set(pokeBase.flatMap((pokemon) => pokemon.type))];
 
