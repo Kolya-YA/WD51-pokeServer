@@ -38,7 +38,7 @@ npm start
 
 ### Pokemon base Routes
 
-- `GET /api/v1/pokes`: Get all pokemons.
+- `GET /api/v1/pokes`: Get all pokemons.       
 - `GET /api/v1/pokes/:id`: Get a specific pokemon.
 - `GET /api/v1/pokes/types`: Get list of pokemon types.
 - `GET /api/v1/pokes/types/:type`: Get pokemons of specific types.

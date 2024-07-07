@@ -15,6 +15,8 @@ app.use(cors(config.corsOptions));
 app.use(express.json());
 app.use(requestLogger);
 
+
+
 app.use("/api/v1/pokes", pokeRoutes);
 app.use("/api/v1/fighters", fighterRoutes);
 
