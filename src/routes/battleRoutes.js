@@ -7,9 +7,9 @@ const battleRouter = express.Router();
 
 battleRouter.get("/last", getLastBattles);
 
-battleRouter.get('/:userId', getButtlesByUserId); // TODO: Add auth middleware
+battleRouter.get('/:userId', auth, getButtlesByUserId);
 
-battleRouter.post("/", postNewBattle); // TODO: Add auth middleware
+battleRouter.post("/", auth, postNewBattle);
 
 
 export default battleRouter;
